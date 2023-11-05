@@ -35,7 +35,11 @@ fn count_lines(path: &str, total_count: &mut Count) {
     let content = std::fs::read_to_string(path).expect("could not read file");
 
     let re_hashtag = Regex::new(r"^\s*#").unwrap();
+<<<<<<< HEAD
     let re_triple_quote_start = Regex::new(r#"^\s*\""""#).unwrap();
+=======
+    let re_triple_quote_start = Regex::new(r#"^\s*""""#).unwrap();
+>>>>>>> 91b6d9a (First commit.)
     let re_triple_quote_end = Regex::new(r#""""$"#).unwrap();
     let re_triple_quote_twice = Regex::new(r#"^\s*""".*"""$"#).unwrap();
 
