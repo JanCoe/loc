@@ -1,0 +1,16 @@
+A code line followed by a blank line.
+
+# A comment line.
+    # A comment line with leading white space.
+Another code line. # with a comment at the end of a line.
+"""A one line docstring type comment"""
+    """A one line docstring type comment with leading white space"""
+A code line again.
+"""The start of a multiline comment
+which is still going on with a blank line
+
+and then ends here"""
+Some more code.
+And more followed by blank line.
+
+Last one.
