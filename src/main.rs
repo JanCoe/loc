@@ -1,6 +1,7 @@
 use clap::Parser;
 use regex::Regex;
 use std::path::{Path, PathBuf};
+use std::fmt;
 
 #[derive(Parser)]
 struct Cli {
@@ -8,6 +9,7 @@ struct Cli {
     extension: String,
 }
 
+#[derive(Debug)]
 struct Count {
     code: u32,
     comment: u32,
@@ -24,6 +26,14 @@ impl Count {
     }
 }
 
+impl fmt::Display for Count {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "Code: {code:>4}; Comments: {comments:>4}; Blank: {blank:>4}",
+            code = self.code,
+            comments = self.comment,
+            blank = self.blank)
+    }
+}
 enum LineType {
     Blank,
     Code,
@@ -75,10 +85,7 @@ fn count_lines(path: &str, total_count: &mut Count) {
         }
     }
 
-    println!(
-        "Code {}. Comments {}. Blank {}. Path {}",
-        local_count.code, local_count.comment, local_count.blank, path
-    );
+    println!("{local_count}; Path: {path}");
 
     total_count.code += local_count.code;
     total_count.comment += local_count.comment;
@@ -121,10 +128,7 @@ fn main() -> std::io::Result<()> {
         &mut total_count,
     )?;
 
-    println!(
-        "Code {}. Comments {}. Blank {}.",
-        total_count.code, total_count.comment, total_count.blank
-    );
+    println!("{total_count}; Path: {path}", path=&args.path.to_string_lossy());
 
     Ok(())
 }
